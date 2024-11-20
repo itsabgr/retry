@@ -1,4 +1,4 @@
-package retry
+package github.com/itsabgr/retry
 
 import (
 	"context"
