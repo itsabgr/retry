@@ -16,14 +16,14 @@ func (s Steps) Loop() (bool, time.Duration) {
 }
 
 func (s Steps) Retry(ctx context.Context) iter.Seq2[int, time.Duration] {
-	return retry(ctx, []time.Duration(s))
+	return retry(ctx, s)
 }
 
 func Retry(ctx context.Context, steps ...time.Duration) iter.Seq2[int, time.Duration] {
 	return retry(ctx, steps)
 }
 
-func retry(ctx context.Context, s []time.Duration) iter.Seq2[int, time.Duration] {
+func retry(ctx context.Context, s Steps) iter.Seq2[int, time.Duration] {
 	return func(yield func(int, time.Duration) bool) {
 		var err error
 		n := 0
