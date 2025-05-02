@@ -7,18 +7,13 @@ import (
 )
 
 func Sleep(ctx context.Context, duration time.Duration) error {
-	if duration <= time.Nanosecond {
-		runtime.Gosched()
-	} else if ctx == nil {
+	if ctx == nil {
 		time.Sleep(duration)
-	} else {
-		select {
+		return nil
+	}
+	select {
 		case <-ctx.Done():
 		case <-time.After(duration):
-		}
-	}
-	if ctx == nil {
-		return nil
 	}
 	return ctx.Err()
 }
