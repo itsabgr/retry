@@ -2,7 +2,6 @@ package retry
 
 import (
 	"context"
-	"runtime"
 	"time"
 )
 
